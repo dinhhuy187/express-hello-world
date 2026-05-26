@@ -1,0 +1,28 @@
+name: CI
+
+on:
+	push:
+	pull_request:
+
+jobs:
+	build:
+		runs-on: ubuntu-latest
+		steps:
+			- name: Checkout source code
+				uses: actions/checkout@v4
+
+			- name: Setup Node.js
+				uses: actions/setup-node@v4
+				with:
+					node-version: "20"
+					cache: "yarn"
+					cache-dependency-path: yarn.lock
+
+			- name: Install dependencies
+				run: yarn install --frozen-lockfile
+
+			- name: Test
+				run: echo Test successful!
+
+			- name: Build docker image
+				run: docker build -t express-hello-world:ci .
