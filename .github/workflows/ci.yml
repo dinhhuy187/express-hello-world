@@ -2,7 +2,9 @@ name: CI
 
 on:
 	push:
+        branches: ["feature/devops"]
 	pull_request:
+		branches: ["feature/devops"]
 
 jobs:
 	build:
